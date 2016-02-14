@@ -1,9 +1,9 @@
 # api-host
 
-# How to setup
+This is server part of API services. Actual endpoints are implemented as separate functions and by using `nildev` tool
+integrated in.
 
-docker run --rm   -v "$(pwd):/src"   -v /var/run/docker.sock:/var/run/docker.sock   centurylink/golang-builder api-host/ping:0.1.0
-docker run -d -p="8080:8080" api-host/ping:0.1.0
+Use [api-builder](https://github.com/nildev/api-builder) to compile final API and produce docker container.
 
 ## Project Details
 
