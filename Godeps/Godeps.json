@@ -1,0 +1,59 @@
+{
+	"ImportPath": "github.com/nildev/api-host",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.8.7-55-gf7f79f7",
+			"Rev": "f7f79f729e0fbe2fcc061db48a9ba0263f588252"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/negroni",
+			"Comment": "v0.1-70-gc7477ad",
+			"Rev": "c7477ad8e330bef55bf1ebe300cf8aa67c492d1b"
+		},
+		{
+			"ImportPath": "github.com/fatih/camelcase",
+			"Rev": "332844f2fb0193cce955f4687646abbdcc43ceeb"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "26a6070f849969ba72b72256e9f14cf519751690"
+		},
+		{
+			"ImportPath": "github.com/juju/errors",
+			"Rev": "b152fd7394724db99a5a4222145d6e4c20e5adff"
+		},
+		{
+			"ImportPath": "github.com/nildev/lib/codegen",
+			"Rev": "8ed0c988abca8c3932952aa7c7c1fd16f1eeb881"
+		},
+		{
+			"ImportPath": "github.com/nildev/lib/router",
+			"Rev": "8ed0c988abca8c3932952aa7c7c1fd16f1eeb881"
+		},
+		{
+			"ImportPath": "github.com/nildev/lib/utils",
+			"Rev": "8ed0c988abca8c3932952aa7c7c1fd16f1eeb881"
+		},
+		{
+			"ImportPath": "github.com/rakyll/globalconf",
+			"Rev": "415abc325023f1a00cd2d9fa512e0e71745791a2"
+		},
+		{
+			"ImportPath": "github.com/rakyll/goini",
+			"Rev": "907cca0f578a5316fb864ec6992dc3d9730ec58c"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "eb2c74142fd19a79b3f237334c7384d5167b1b46"
+		}
+	]
+}
