@@ -2,9 +2,10 @@ package logrus_syslog
 
 import (
 	"fmt"
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 	"log/syslog"
 	"os"
+
+	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 )
 
 // SyslogHook to send logs via syslog.

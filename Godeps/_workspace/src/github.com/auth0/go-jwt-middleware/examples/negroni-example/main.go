@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/auth0/go-jwt-middleware"
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/codegangsta/negroni"
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/dgrijalva/jwt-go"
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/gorilla/mux"
-	"net/http"
 )
 
 func main() {

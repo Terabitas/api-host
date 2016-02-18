@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/getsentry/raven-go"
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 )
 

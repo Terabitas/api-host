@@ -2,10 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/go-martini/martini"
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/auth0/go-jwt-middleware"
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/dgrijalva/jwt-go"
-	"net/http"
 )
 
 func main() {
