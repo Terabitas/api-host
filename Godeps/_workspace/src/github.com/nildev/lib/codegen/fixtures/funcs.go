@@ -15,7 +15,7 @@ type (
 )
 
 // CheckPrimitive to check primitive types
-// @method POST
+// @method GET
 func CheckPrimitive(
 	msg string,
 	num int,
@@ -31,7 +31,7 @@ func CheckPrimitive(
 }
 
 // CheckNestedMap to check primitive types
-// @method POST
+// @method DELETE
 func CheckNestedMap(
 	mapSS map[string]string,
 	mapSMI map[string]map[string]int,
@@ -48,7 +48,7 @@ func CheckNestedMap(
 }
 
 // CheckVariadicParam to check primitive types
-// @method POST
+// @method PUT
 func CheckVariadicParam(
 	x ...map[sub.MyInterface]int,
 ) {
@@ -67,4 +67,31 @@ func CheckComplex(
 ) (rstr1 MyStruct, rstr2 MyOtherStruct, rinteM sub.MyInterface, rinte interface{}, rst struct{}, rai alias.MyInterface) {
 
 	return rstr1, rstr2, rinteM, rinte, rst, rai
+}
+
+// CheckGetter getter
+// All signature params will have to be passed in query string or path
+// Params which have type of pointer will be optional and wont be included in query
+// If no validation rule is required than you do not need to add to @query it will be taken from signature
+// @method GET
+// @path /my-path/{varOne}/{xxx}/sub-resource/{second:[a-z]+}
+// @query {mineRegex:[A-Z]+} {mineRegex2:[0-9]{4}[a-z]{5}} {mineRegex26:[0-9]{4}[a-z]{5}} {notOptional}
+func CheckGetter(varOne int, xxx string, second string, mineRegex string, mineRegex2 string, mineRegex26 string, notOptional string, optionalParam *string) (rez string) {
+	return rez
+}
+
+// CheckPoster post
+// All signature params will have to be included in POST body
+// Only params from @path and @query will be passed to function from path and query string
+// @method POST
+// @path /my-path/{varOne}/{xxx}/sub-resource/{second:[a-z]+}
+// @query {mineRegex:[A-Z]+} {notOptional}
+func CheckPoster(varOne int, xxx string, second string, mineRegex string, mineRegex2 string, mineRegex26 string, notOptional string, optionalParam *string) (rez string) {
+	return rez
+}
+
+// CheckNone to check primitive types
+// @protected
+func CheckNone(boo string) (rez string) {
+	return rez
 }

@@ -6,4 +6,5 @@ type Config struct {
 	EndpointURL string
 	IP          string
 	Port        string
+	Secret      string
 }

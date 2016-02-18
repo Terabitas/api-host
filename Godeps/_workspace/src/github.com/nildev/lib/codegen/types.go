@@ -6,7 +6,10 @@ import (
 	"strings"
 	"unicode"
 
+	"strconv"
+
 	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/fatih/camelcase"
+	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/juju/errors"
 )
 
 type (
@@ -35,12 +38,14 @@ type (
 	Structs map[string]Struct
 
 	Func struct {
-		PkgPath string
-		Name    string
-		Method  string
-		Pattern string
-		In      *Struct
-		Out     *Struct
+		PkgPath   string
+		Name      string
+		Method    string
+		Protected bool
+		Pattern   string
+		Query     []string
+		In        *Struct
+		Out       *Struct
 	}
 
 	Funcs []Func
@@ -80,16 +85,92 @@ func (f Func) GetMethod() string {
 	return f.Method
 }
 
+func (f Func) GetQuery() []string {
+	return f.Query
+}
+
 func (f Func) GetPattern() string {
-	return "/" + f.Pattern
+	return f.Pattern
 }
 
 func (f Func) GetHandlerName() string {
 	return f.Name + "Handler"
 }
+func (f Func) GetProtected() bool {
+	return f.Protected
+}
 
 func (fld Field) GetVarName() string {
 	return makeFirstUpperCase(fld.Name)
+}
+
+func (fld Field) GetVarValue(data map[string]string) (interface{}, error) {
+	// if value exists in variables
+	if val, ok := data[fld.Name]; ok {
+		switch fld.Type {
+		case "string":
+			return val, nil
+		case "*string":
+			return &val, nil
+		case "*int":
+			i, err := strconv.Atoi(val)
+			return &i, err
+		case "int":
+			i, err := strconv.Atoi(val)
+			return i, err
+		case "int8":
+			i, err := strconv.ParseInt(val, 10, 8)
+			return int8(i), err
+		case "*int8":
+			i, err := strconv.ParseInt(val, 10, 8)
+			icst := int8(i)
+			return &icst, err
+		case "int16":
+			i, err := strconv.ParseInt(val, 10, 16)
+			return int16(i), err
+		case "*int16":
+			i, err := strconv.ParseInt(val, 10, 16)
+			icst := int16(i)
+			return &icst, err
+		case "int32":
+			i, err := strconv.ParseInt(val, 10, 32)
+			return int32(i), err
+		case "*int32":
+			i, err := strconv.ParseInt(val, 10, 32)
+			icst := int32(i)
+			return &icst, err
+		case "int64":
+			i, err := strconv.ParseInt(val, 10, 64)
+			return i, err
+		case "*int64":
+			i, err := strconv.ParseInt(val, 10, 64)
+			return &i, err
+		case "float32":
+			i, err := strconv.ParseFloat(val, 32)
+			return float32(i), err
+		case "*float32":
+			i, err := strconv.ParseFloat(val, 32)
+			icst := float32(i)
+			return &icst, err
+		case "float64":
+			i, err := strconv.ParseFloat(val, 64)
+			return i, err
+		case "*float64":
+			i, err := strconv.ParseFloat(val, 64)
+			icst := float64(i)
+			return &icst, err
+		case "bool":
+			b, err := strconv.ParseBool(val)
+			return b, err
+		case "*bool":
+			b, err := strconv.ParseBool(val)
+			return &b, err
+		default:
+			return nil, errors.Trace(errors.Errorf("Value is complext type!Expected only primitives!"))
+		}
+	}
+
+	return nil, nil
 }
 
 func (fld Field) GetVarType() string {

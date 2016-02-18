@@ -10,6 +10,7 @@ type (
 		Pattern     string
 		HandlerFunc http.HandlerFunc
 		Queries     []string
+		Protected   bool
 	}
 
 	// Routes is a collection of Route structures.

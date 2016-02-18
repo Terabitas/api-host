@@ -8,7 +8,7 @@ if [ -z "$1" ]; then
 fi
 
 echo "Saving deps"
-godep save -r ./...
+#godep save -r ./...
 
 echo "Building api-host"
 CGO_ENABLED=0 godep go build -o bin/api-host -a -installsuffix netgo -ldflags "-s -X main.Version=$VER -X main.GitHash=`git rev-parse HEAD` -X main.BuiltTimestamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'`" ${REPO_PATH}

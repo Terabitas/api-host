@@ -74,6 +74,7 @@ func main() {
 	cfgset.String("endpointurl", "", "Endpoint url")
 	cfgset.String("ip", "", "Server IP to bind")
 	cfgset.String("port", "", "Port to listen on")
+	cfgset.String("secret", "", "Secret")
 
 	globalconf.Register("", cfgset)
 	cfg, err := getConfig(cfgset, *cfgPath)
@@ -169,6 +170,7 @@ func getConfig(flagset *flag.FlagSet, userCfgFile string) (*config.Config, error
 		EndpointURL: (*flagset.Lookup("endpointurl")).Value.(flag.Getter).Get().(string),
 		IP:          (*flagset.Lookup("ip")).Value.(flag.Getter).Get().(string),
 		Port:        (*flagset.Lookup("port")).Value.(flag.Getter).Get().(string),
+		Secret:      (*flagset.Lookup("secret")).Value.(flag.Getter).Get().(string),
 	}
 
 	log.SetLevel(logrus.Level(cfg.Verbosity))

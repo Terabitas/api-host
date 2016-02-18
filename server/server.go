@@ -21,7 +21,7 @@ func New(cfg config.Config) (*Server, error) {
 	srv := Server{
 		cfg:     cfg,
 		stop:    nil,
-		handler: endpoints.Router(),
+		handler: endpoints.Router(cfg),
 	}
 	return &srv, nil
 }
