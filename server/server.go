@@ -3,7 +3,7 @@ package server
 import (
 	"net/http"
 
-	log "github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 	"github.com/nildev/api-host/config"
 	"github.com/nildev/api-host/endpoints"
 	"github.com/nildev/api-host/version"

@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/nildev/api-host",
-	"GoVersion": "go1.5",
+	"GoVersion": "go1.6",
 	"Packages": [
 		"./..."
 	],
@@ -42,15 +42,15 @@
 		},
 		{
 			"ImportPath": "github.com/nildev/lib/codegen",
-			"Rev": "8d0a5bb997de0956393e903bafd13ec11a052543"
+			"Rev": "b073484ec1b6d967d5450865be13b148db5c783b"
 		},
 		{
 			"ImportPath": "github.com/nildev/lib/router",
-			"Rev": "8d0a5bb997de0956393e903bafd13ec11a052543"
+			"Rev": "b073484ec1b6d967d5450865be13b148db5c783b"
 		},
 		{
 			"ImportPath": "github.com/nildev/lib/utils",
-			"Rev": "8d0a5bb997de0956393e903bafd13ec11a052543"
+			"Rev": "b073484ec1b6d967d5450865be13b148db5c783b"
 		},
 		{
 			"ImportPath": "github.com/rakyll/globalconf",

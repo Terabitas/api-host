@@ -5,11 +5,11 @@ import (
 
 	"fmt"
 
-	log "github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/auth0/go-jwt-middleware"
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/codegangsta/negroni"
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/dgrijalva/jwt-go"
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/gorilla/mux"
+	log "github.com/Sirupsen/logrus"
+	"github.com/auth0/go-jwt-middleware"
+	"github.com/codegangsta/negroni"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/mux"
 	"github.com/nildev/api-host/config"
 	"github.com/nildev/api-host/gen"
 	"github.com/nildev/api-host/version"

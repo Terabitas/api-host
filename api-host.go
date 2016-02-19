@@ -8,17 +8,17 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/nildev/api-host/Godeps/_workspace/src/github.com/rakyll/globalconf"
+	"github.com/Sirupsen/logrus"
 	"github.com/nildev/api-host/version"
+	"github.com/rakyll/globalconf"
 
 	"github.com/nildev/api-host/config"
 	"github.com/nildev/api-host/server"
 
 	// Import these as after code is generated it will be required
-	log "github.com/nildev/api-host/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	_ "github.com/nildev/api-host/Godeps/_workspace/src/github.com/nildev/lib/codegen"
-	_ "github.com/nildev/api-host/Godeps/_workspace/src/github.com/nildev/lib/utils"
+	log "github.com/Sirupsen/logrus"
+	_ "github.com/nildev/lib/codegen"
+	_ "github.com/nildev/lib/utils"
 )
 
 const (
