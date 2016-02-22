@@ -171,7 +171,7 @@ func getConfig(flagset *flag.FlagSet, userCfgFile string) (*config.Config, error
 		Secret:      (*flagset.Lookup("secret")).Value.(flag.Getter).Get().(string),
 	}
 
-	log.SetLevel(logrus.Level(cfg.Verbosity))
+	log.SetLevel(log.Level(cfg.Verbosity))
 
 	ctxLog.Infof("Loaded config: [%+v]", cfg)
 
