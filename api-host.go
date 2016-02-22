@@ -8,12 +8,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/nildev/api-host/version"
-	"github.com/rakyll/globalconf"
-
 	"github.com/nildev/api-host/config"
 	"github.com/nildev/api-host/server"
+	"github.com/nildev/api-host/version"
+	"github.com/rakyll/globalconf"
 
 	// Import these as after code is generated it will be required
 	log "github.com/Sirupsen/logrus"

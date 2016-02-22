@@ -3,12 +3,11 @@ package jwtmiddleware
 import (
 	"errors"
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/context"
 	"log"
 	"net/http"
 	"strings"
-
-	"github.com/dgrijalva/jwt-go"
-	"github.com/gorilla/context"
 )
 
 // A function called whenever an error is encountered

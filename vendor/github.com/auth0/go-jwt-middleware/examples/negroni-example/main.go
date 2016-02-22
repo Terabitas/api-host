@@ -2,12 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"net/http"
-
 	"github.com/auth0/go-jwt-middleware"
 	"github.com/codegangsta/negroni"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
+	"net/http"
 )
 
 func main() {
