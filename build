@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
     VER=`git rev-parse --abbrev-ref HEAD`
 fi
 
-echo "Saving deps"
+#echo "Saving deps"
 #godep save -r ./...
 
 echo "Building api-host"
