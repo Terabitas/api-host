@@ -6,10 +6,6 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "bitbucket.org/bobas/back",
-			"Rev": "05dcaf7e0530cac6e5e9c2335885b11fa3c6acc4"
-		},
-		{
 			"ImportPath": "github.com/Sirupsen/logrus",
 			"Comment": "v0.6.2-10-g51fe59a",
 			"Rev": "51fe59aca108dc5680109e7b2051cbdcfa5a253c"
