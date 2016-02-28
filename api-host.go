@@ -43,6 +43,7 @@ func init() {
 func main() {
 	ctxLog = log.WithField("version", version.Version).WithField("git-hash", version.GitHash).WithField("build-time", version.BuiltTimestamp)
 	userset := flag.NewFlagSet("apihostd", flag.ExitOnError)
+
 	printVersion := userset.Bool("version", false, "Print the version and exit")
 	cfgPath := userset.String("config", DefaultConfigFile, fmt.Sprintf("Path to config file. apihostd will look for a config at %s by default.", DefaultConfigFile))
 
@@ -68,11 +69,21 @@ func main() {
 	}
 
 	cfgset := flag.NewFlagSet("apihostd", flag.ExitOnError)
+	// Generic
 	cfgset.Int("verbosity", 0, "Logging level")
-	cfgset.String("endpointurl", "", "Endpoint url")
 	cfgset.String("ip", "", "Server IP to bind")
 	cfgset.String("port", "", "Port to listen on")
-	cfgset.String("secret", "", "Secret")
+	// CORS
+	cfgset.String("cors_allowed_origins", "*", "A list of origins a cross-domain request can be executed from")
+	cfgset.String("cors_allowed_methods", "GET,POST,DELETE", "A list of methods the client is allowed to use with cross-domain requests")
+	cfgset.String("cors_allowed_headers", "origin, content-type, accept, authorization", "A list of non simple headers the client is allowed to use with cross-domain requests.")
+	cfgset.String("cors_exposed_headers", "", "Indicates which headers are safe to expose to the API of a CORS API specification")
+	cfgset.Bool("cors_allow_credentials", false, "Indicates whether the request can include user credentials like cookies, HTTP authentication or client side SSL certificates.")
+	cfgset.Int("cors_max_age", 0, "Indicates how long (in seconds) the results of a preflight request can be cached.")
+	cfgset.Bool("cors_options_pass_through", false, "Instructs preflight to let other potential next handlers to process the OPTIONS method.")
+	cfgset.Bool("cors_debug", false, "Debugging flag adds additional output to debug server side CORS issues.")
+	// JWT
+	cfgset.String("jwt_sign_key", "", "JWT signing key")
 
 	globalconf.Register("", cfgset)
 	cfg, err := getConfig(cfgset, *cfgPath)
@@ -164,11 +175,19 @@ func getConfig(flagset *flag.FlagSet, userCfgFile string) (*config.Config, error
 	gconf.ParseSet("", flagset)
 
 	cfg := config.Config{
-		Verbosity:   (*flagset.Lookup("verbosity")).Value.(flag.Getter).Get().(int),
-		EndpointURL: (*flagset.Lookup("endpointurl")).Value.(flag.Getter).Get().(string),
-		IP:          (*flagset.Lookup("ip")).Value.(flag.Getter).Get().(string),
-		Port:        (*flagset.Lookup("port")).Value.(flag.Getter).Get().(string),
-		Secret:      (*flagset.Lookup("secret")).Value.(flag.Getter).Get().(string),
+		Verbosity: (*flagset.Lookup("verbosity")).Value.(flag.Getter).Get().(int),
+		IP:        (*flagset.Lookup("ip")).Value.(flag.Getter).Get().(string),
+		Port:      (*flagset.Lookup("port")).Value.(flag.Getter).Get().(string),
+		Secret:    (*flagset.Lookup("jwt_sign_key")).Value.(flag.Getter).Get().(string),
+
+		CORSAllowedOrigins:     config.StringToSlice((*flagset.Lookup("cors_allowed_origins")).Value.(flag.Getter).Get().(string)),
+		CORSAllowedMethods:     config.StringToSlice((*flagset.Lookup("cors_allowed_methods")).Value.(flag.Getter).Get().(string)),
+		CORSAllowedHeaders:     config.StringToSlice((*flagset.Lookup("cors_allowed_headers")).Value.(flag.Getter).Get().(string)),
+		CORSExposedHeaders:     config.StringToSlice((*flagset.Lookup("cors_exposed_headers")).Value.(flag.Getter).Get().(string)),
+		CORSAllowCredentials:   (*flagset.Lookup("cors_allow_credentials")).Value.(flag.Getter).Get().(bool),
+		CORSMaxAge:             (*flagset.Lookup("cors_max_age")).Value.(flag.Getter).Get().(int),
+		CORSOptionsPassThrough: (*flagset.Lookup("cors_options_pass_through")).Value.(flag.Getter).Get().(bool),
+		CORSDebug:              (*flagset.Lookup("cors_debug")).Value.(flag.Getter).Get().(bool),
 	}
 
 	log.SetLevel(log.Level(cfg.Verbosity))

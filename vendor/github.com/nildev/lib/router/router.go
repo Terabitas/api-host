@@ -9,7 +9,7 @@ func NewRouter(routes Routes) *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes.Routes {
 		router.
-			Methods(route.Method).
+			Methods(route.Method...).
 			Name(route.Name).
 			Path(routes.BasePattern + route.Pattern).
 			Queries(route.Queries...).

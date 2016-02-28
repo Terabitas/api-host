@@ -13,6 +13,7 @@ import (
 	"github.com/nildev/api-host/config"
 	"github.com/nildev/api-host/gen"
 	"github.com/nildev/api-host/version"
+	"github.com/rs/cors"
 )
 
 var (
@@ -45,17 +46,32 @@ func RegisterRoutes(r *mux.Router, cfg config.Config) {
 		SigningMethod: jwt.SigningMethodHS256,
 	})
 
+	corsMlw := cors.New(cors.Options{
+		AllowedOrigins:     cfg.CORSAllowedOrigins,
+		AllowedMethods:     cfg.CORSAllowedMethods,
+		AllowedHeaders:     cfg.CORSAllowedHeaders,
+		ExposedHeaders:     cfg.CORSExposedHeaders,
+		AllowCredentials:   cfg.CORSAllowCredentials,
+		MaxAge:             cfg.CORSMaxAge,
+		OptionsPassthrough: cfg.CORSOptionsPassThrough,
+		Debug:              cfg.CORSDebug,
+	})
+
 	for _, rt := range routes {
 		apiRouter := mux.NewRouter().StrictSlash(true)
 		for _, route := range rt.Routes {
 			handlerFunc := negroni.New()
+
+			// Add CORS middleware
+			handlerFunc.Use(corsMlw)
+
 			// Add JWT middleware if route is protected
 			if route.Protected {
 				handlerFunc.Use(negroni.HandlerFunc(jwtMiddleware.HandlerWithNext))
 			}
 
 			apiRouter.
-				Methods(route.Method).
+				Methods(route.Method...).
 				Name(route.Name).
 				Path(fmt.Sprintf("%s%s", rt.BasePattern, route.Pattern)).
 				Queries(route.Queries...).

@@ -6,7 +6,7 @@ type (
 	// Route structure contains information about a route and a reference to a handler.
 	Route struct {
 		Name        string
-		Method      string
+		Method      []string
 		Pattern     string
 		HandlerFunc http.HandlerFunc
 		Queries     []string
